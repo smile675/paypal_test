@@ -59,7 +59,7 @@ class MyHomePage extends StatelessWidget {
                 transaction(),
                 token.token!,
               );
-              html.window.open(payment.approvalUrl!, "Paymnet");
+              html.window.open(payment.approvalUrl!, "Payment");
             },
             child: const Text("Pay")),
       ),
@@ -117,7 +117,7 @@ class PaypalPayment {
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        print(data['links']);
+        // print(data['links']);
         if (data["links"] != null && data["links"].length > 0) {
           List links = data["links"];
 

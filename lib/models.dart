@@ -49,7 +49,7 @@ transaction() {
           "landing_page": "LOGIN",
           // "shipping_preference": "SET_PROVIDED_ADDRESS",
           "user_action": "PAY_NOW",
-          "return_url": "https://example.com/returnUrl",
+          "return_url": "/success",
           "cancel_url": "https://example.com/cancelUrl"
         }
       }
