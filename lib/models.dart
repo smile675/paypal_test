@@ -1,3 +1,5 @@
+import 'dart:html' as html;
+
 class Token {
   final String? token;
   final String? message;
@@ -32,11 +34,12 @@ class Payment {
 }
 
 transaction() {
+  String baseUrl = html.window.location.origin;
   Map<String, dynamic> transactions = {
     "intent": "CAPTURE",
     "purchase_units": [
       {
-        "reference_id": "d9f80740-38f0-11e8-b467-0ed5f89f718b",
+        // "reference_id": "d9f80740-38f0-11e8-b467-0ed5f89f718b",
         "amount": {"currency_code": "USD", "value": "100.00"}
       }
     ],
@@ -49,8 +52,10 @@ transaction() {
           "landing_page": "LOGIN",
           // "shipping_preference": "SET_PROVIDED_ADDRESS",
           "user_action": "PAY_NOW",
-          "return_url": "/success",
-          "cancel_url": "https://example.com/cancelUrl"
+          "return_url": "$baseUrl/payment_success",
+          //"https://example.com/successUrl", //https://example.com/cancelUrl
+          "cancel_url":
+              "$baseUrl/payment_failed", //"https://example.com/cancelUrl"
         }
       }
     }

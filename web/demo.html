@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>PayPal Payment Page</title>
+    <!-- Include the PayPal JavaScript SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID"></script>
+</head>
+
+<body>
+    <!-- Your payment form and PayPal buttons go here -->
+    <div id="paypal-button-container"></div>
+    <!-- <h1>Button</h1> -->
+
+    <script>
+        // Set up the PayPal button
+        paypal.Buttons({
+            createOrder: function (data, actions) {
+                // Set up the transaction details
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '10.00' // Total amount for the transaction
+                        }
+                    }]
+                });
+            },
+            onApprove: function (data, actions) {
+                // Capture the payment
+                return actions.order.capture().then(function (details) {
+                    // Handle successful payment
+                    alert('Transaction completed by ' + details.payer.name.given_name);
+                });
+            }
+        }).render('#paypal-button-container');
+    </script>
+</body>
+
+</html>
