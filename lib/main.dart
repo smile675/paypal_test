@@ -1,11 +1,14 @@
 // import 'package:example/paypal_webview.dart';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:papalgateway/paypal_service.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 import 'router.dart';
 
 void main() {
+  setPathUrlStrategy();
   runApp(const MyApp());
 }
 
@@ -43,8 +46,13 @@ class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
 
-  void subscribe() {
+  subscribe() {
     _service.paypalPayment();
+  }
+
+  registerUser() {
+    print(email.text);
+    print(password.text);
   }
 
   @override
@@ -67,13 +75,11 @@ class _MyHomePageState extends State<MyHomePage> {
               hintText: "Password",
             ),
           ),
-          Center(
-            child: TextButton(
-              onPressed: () {
-                subscribe();
-              },
-              child: const Text("Subscribe"),
-            ),
+          TextButton(
+            onPressed: () {
+              subscribe();
+            },
+            child: const Text("Subscribe"),
           ),
         ],
       ),

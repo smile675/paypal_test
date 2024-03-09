@@ -1,14 +1,15 @@
+import 'package:papalgateway/secret.dart';
+
 import 'models.dart';
 import 'payment_api.dart';
+// ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
 
 class PaypalService {
   Future<void> paypalPayment() async {
     PaypalSecret secret = PaypalSecret(
-      clientId:
-          'AULNDDYjz27qvIt2iEpYmGvDLG_Gq9kVgCNZcq36UnfZnqHOBaNjqpuirtq3WfXBWLAteXHtBJOku7ff',
-      clientSecret:
-          'EKagkSdkbInPdPB8WKrXvWHnu_rkqojhR7bjLVyw_Fn0z1O0WktdgxRvykFRiqbcE5k-HigUU1KpqiZT',
+      clientId: Secret.clientIdSandbox,
+      clientSecret: Secret.clientSecretSandbox,
       paymentMode: PaymentMode.sandbox,
     );
 
@@ -20,7 +21,7 @@ class PaypalService {
       return;
     }
     Payment payment = await paymentService.createPayment(
-      transaction(),
+      transactionSubscription(),
       token.token!,
     );
     if (payment.approvalUrl == null) {
